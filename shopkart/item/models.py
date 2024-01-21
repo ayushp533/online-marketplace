@@ -21,4 +21,7 @@ class Item(models.Model):
     created_by = models.ForeignKey(User, related_name='items', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=False)
     
+    def __str__(self):
+        return self.name
+    
 # 32:33 @ https://www.youtube.com/watch?v=ZxMB6Njs3ck
