@@ -4,10 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
 from .forms import NewItemForm, EditItemForm
-from .models import Item
+from .models import Item, Category
 
 def items(request):
     query = request.GET.get('query', '')
+    category_id = request.GET.get('category', 0)
+    categories = Category.objects.all()
     items = Item.objects.filter(is_sold=False)
     
     if query:
@@ -16,6 +18,8 @@ def items(request):
     return render(request, 'item/items.html', {
         'items':items,
         'query':query,
+        'categories': categories,
+        'category_id': int(category_id),
     })
 
 def detail(request, pk):
@@ -24,7 +28,7 @@ def detail(request, pk):
     
     return render(request, 'item/detail.html', {
         'item': item,
-        'related_items': related_items
+        'related_items': related_items,
     })
     
 @login_required
