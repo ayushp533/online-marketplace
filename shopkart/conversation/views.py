@@ -47,3 +47,11 @@ def inbox(request):
     return render(request, 'conversation/inbox.html', {
         'conversations': conversations,
     })
+
+@login_required
+def detail(request, pk):
+    conversation = get_object_or_404(Conversation, pk=pk, members=request.user)
+    
+    return render(request, 'conversation/detail.html', {
+        'conversation': conversation,
+    })
