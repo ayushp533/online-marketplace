@@ -31,9 +31,9 @@ def new_conversation(request, item_pk):
             conversation_message.save()
             
             return redirect('item:detail', pk=item.pk)
-        else:
-            form = ConversationMessageForm()
+    else:
+        form = ConversationMessageForm()
         
-        return render(request, 'conversation/new.html', {
-            'form': form,
-        })
+    return render(request, 'conversation/new.html', {
+        'form': form,
+    })
